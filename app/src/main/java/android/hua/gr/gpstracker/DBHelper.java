@@ -59,11 +59,11 @@ class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         final String USERS_TABLE_CREATE =
                 "CREATE TABLE " + TABLE_USERS +
-                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
-                        + USER_ID + " TEXT,"
-                        + LONGITUDE + " REAL,"
-                        + LATITUDE + " REAL,"
-                        + DT + " TEXT" + ");";
+                        "(" + ID + " INTEGER PRIMARY KEY NOT NULL,"
+                        + USER_ID + " TEXT NOT NULL,"
+                        + LONGITUDE + " REAL NOT NULL,"
+                        + LATITUDE + " REAL NOT NULL,"
+                        + DT + " TEXT NOT NULL" + ");";
 
         // Execute the DB's creation String
         db.execSQL(USERS_TABLE_CREATE);
