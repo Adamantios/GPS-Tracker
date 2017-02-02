@@ -28,7 +28,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:enabled="true" android:name=".LocationsService" />
+        <service android:name=".LocationsService" android:exported="false"/>
 
         <provider android:name="UserProvider"
             android:authorities="android.hua.gr.gpstracker.UserProvider"

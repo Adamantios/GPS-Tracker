@@ -19,7 +19,7 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
     /**
      * The RESTful Service URL.
      */
-    private static final String REST_URL = "change me";
+    private static final String REST_URL = "change me/location";
     private Context context;
     private static boolean succeded = false;
     private static ArrayList<User> users = new ArrayList<>();

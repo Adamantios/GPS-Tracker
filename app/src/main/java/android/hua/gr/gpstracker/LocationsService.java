@@ -1,30 +1,29 @@
 package android.hua.gr.gpstracker;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-public class LocationsService extends Service{
-    @Nullable
+public class LocationsService extends Service {
+    Context context;
+
     @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public void onCreate() {
+        context = this;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-        return START_STICKY;
+        new FetchLocations(context).execute();
+        return START_NOT_STICKY;
     }
 
+    @Nullable
     @Override
-    public void onCreate() {
-        ConnectivityHelper connectivityHelper = new ConnectivityHelper(getApplicationContext());
-
-        if (connectivityHelper.isNetworkAvailable())
-            new FetchLocations(getApplicationContext()).execute();
-        else
-            connectivityHelper.showNetworkAlert();
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }

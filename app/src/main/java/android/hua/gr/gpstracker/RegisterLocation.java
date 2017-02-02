@@ -21,7 +21,7 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
     /**
      * The RESTful Service URL.
      */
-    private static final String REST_URL = "change me";
+    private static final String REST_URL = "change me/location";
     private static Double longitude;
     private static Double latitude;
     private Context context;
@@ -43,7 +43,6 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
 
             // Build jsonObject
             JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("method", "location");
             jsonObject.accumulate("userid", "it21222");
             jsonObject.accumulate("longitude", longitude);
             jsonObject.accumulate("latitude", latitude);
@@ -68,13 +67,11 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
             // Receive response as inputStream
             InputStream inputStream = httpResponse.getEntity().getContent();
 
-            // Convert input stream to string
             return inputStream != null;
 
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            return false;
         }
-
-        return false;
     }
 
     @Override

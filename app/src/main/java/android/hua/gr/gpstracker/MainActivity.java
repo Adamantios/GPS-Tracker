@@ -18,7 +18,13 @@ public class MainActivity extends AppCompatActivity {
      * @param v the view
      */
     public void fetchLocations(View v) {
-        Intent intent = new Intent(this, LocationsService.class);
-        startService(intent);
+        ConnectivityHelper connectivityHelper = new ConnectivityHelper(this);
+
+        if (!connectivityHelper.isNetworkAvailable())
+            connectivityHelper.showNetworkAlert();
+        else {
+            Intent intent = new Intent(this, LocationsService.class);
+            this.startService(intent);
+        }
     }
 }

@@ -10,13 +10,15 @@
     <string name="starting_tracker">Your position will start being tracked in 5 seconds…</string>
     <string name="post_location_error">
         Something went wrong while trying to register your current location!
+        Please check your internet connection!
         Next registration attempt will happen in 30 seconds.</string>
     <string name="post_location_success">Your position has been successfully registered!</string>
     <string name="get_locations_error">
         Something went wrong while trying to get all the users with their locations!</string>
     <string name="save_error">
         Something went wrong while trying to save all the users with their locations!
-        Please try again! Another attempt will happen automatically in 10 minutes.</string>
+        Please check your internet connection!
+        Another attempt will happen automatically in 10 minutes.</string>
     <string name="save_success">
         All the users with their locations have been successfully saved!</string>
 </resources>
