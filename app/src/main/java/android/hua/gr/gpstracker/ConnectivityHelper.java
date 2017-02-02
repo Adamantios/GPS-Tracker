@@ -27,7 +27,7 @@ class ConnectivityHelper {
      * Checks if network is available
      * @return if network is available
      */
-    public boolean isNetworkAvailable() {
+    boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -77,7 +77,7 @@ class ConnectivityHelper {
     /**
      * Shows Alert Dialog in order to get the user to the network settings
      */
-    public void showNetworkAlert() {
+    void showNetworkAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
         // Setting Dialog Title
