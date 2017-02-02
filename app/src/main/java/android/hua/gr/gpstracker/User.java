@@ -54,7 +54,7 @@ class User {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    void setLatitude(float latitude) {
         this.latitude = latitude;
     }
 
@@ -62,7 +62,7 @@ class User {
         return dt;
     }
 
-    public void setDt(String dt) {
+    void setDt(String dt) {
         this.dt = dt;
     }
 }
