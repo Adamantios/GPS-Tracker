@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-class LocationsService extends Service{
+public class LocationsService extends Service{
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
