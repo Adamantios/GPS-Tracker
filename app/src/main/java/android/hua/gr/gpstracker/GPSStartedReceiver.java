@@ -73,8 +73,7 @@ public class GPSStartedReceiver extends BroadcastReceiver {
                     public void onTick(long millisUntilFinished) {
                     }
                 }.start();
-            } else
-                helper.showGPSAlert();
+            }
         }
     }
 }
