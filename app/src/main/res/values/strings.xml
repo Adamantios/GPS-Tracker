@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">GPSTracker</string>
+    <string name="fetch_other_users">Fetch all the users with their locations</string>
+    <string name="welcome_message">Welcome to GPS Tracker</string>
+    <string name="error">Error!</string>
+    <string name="GPS_settings">Cannot establish GPS connection!
+        Would you like to go to the settings menu?</string>
+    <string name="internet_settings">Cannot establish internet connection!
+        Would you like to go to the settings menu?</string>
+    <string name="starting_tracker">Your position will start being tracked in 5 seconds…</string>
+    <string name="post_location_error">
+        Something went wrong while trying to register your current location!
+        Next registration attempt will happen in 30 seconds.</string>
+    <string name="post_location_success">Your position has been successfully registered!</string>
+    <string name="get_locations_error">
+        Something went wrong while trying to get all the users with their locations!</string>
+    <string name="save_error">
+        Something went wrong while trying to save all the users with their locations!
+        Please try again! Another attempt will happen automatically in 10 minutes.</string>
+    <string name="save_success">
+        All the users with their locations have been successfully saved!</string>
+</resources>
