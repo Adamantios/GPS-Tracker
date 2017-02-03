@@ -2,16 +2,20 @@ package android.hua.gr.gpstracker;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 class FetchLocations extends AsyncTask<Void, Void, Void> {
@@ -19,7 +23,7 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
     /**
      * The RESTful Service URL.
      */
-    private static final String REST_URL = "change me/location";
+    private static final String REST_URL = "http://62.217.127.19:8000/location";
     private Context context;
     private static boolean succeded = false;
     private static ArrayList<User> users = new ArrayList<>();
@@ -37,16 +41,15 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
             HttpGet httpGet = new HttpGet(REST_URL);
 
             HttpResponse response = httpclient.execute(httpGet);
+            Log.d("debug", Integer.toString(response.getStatusLine().getStatusCode()));
 
             if (response.getStatusLine().getStatusCode() == 200) {
                 // Create a JSON object from the response
-                JSONObject json = new JSONObject(EntityUtils.toString(response.getEntity()));
-                // Get "data" json object
-                JSONArray leaders = json.getJSONArray("data");
+                JSONArray json = new JSONArray(EntityUtils.toString(response.getEntity()));
 
                 // Add every User's Data into the ArrayList
-                for (int i = 0; i < leaders.length(); i++) {
-                    JSONObject jsonSingleDataRow = leaders.getJSONObject(i);
+                for (int i = 0; i < json.length(); i++) {
+                    JSONObject jsonSingleDataRow = json.getJSONObject(i);
 
                     int id = jsonSingleDataRow.getInt("id");
                     String user_id = jsonSingleDataRow.getString("userid");
@@ -67,7 +70,8 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
                 succeded = true;
             }
 
-        } catch (Exception ignored) {
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
         }
     }
 

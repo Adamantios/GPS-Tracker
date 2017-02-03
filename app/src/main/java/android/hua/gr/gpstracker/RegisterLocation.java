@@ -21,7 +21,7 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
     /**
      * The RESTful Service URL.
      */
-    private static final String REST_URL = "change me/location";
+    private static final String REST_URL = "http://62.217.127.19:8000/location";
     private static Double longitude;
     private static Double latitude;
     private Context context;
@@ -43,10 +43,10 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
 
             // Build jsonObject
             JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("userid", "it21222");
+            jsonObject.accumulate("userid", "mpampoulas");
             jsonObject.accumulate("longitude", longitude);
             jsonObject.accumulate("latitude", latitude);
-            jsonObject.accumulate("dt", DateFormat.getDateTimeInstance().format(new Date()));
+            jsonObject.accumulate("dt", android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss a", new java.util.Date()));
 
             // Convert JSONObject to String
             String json = jsonObject.toString();
