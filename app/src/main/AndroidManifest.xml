@@ -28,6 +28,7 @@
             </intent-filter>
         </receiver>
 
+        <service android:name=".GPSTracker" android:exported="false"/>
         <service android:name=".LocationsService" android:exported="false"/>
 
         <provider android:name="UserProvider"

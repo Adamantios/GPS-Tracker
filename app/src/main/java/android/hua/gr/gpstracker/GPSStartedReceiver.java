@@ -48,7 +48,7 @@ public class GPSStartedReceiver extends BroadcastReceiver {
                     public void onFinish() {
                         Intent intent = new Intent(context, GPSTracker.class);
                         PendingIntent pendingIntent =
-                                PendingIntent.getBroadcast(context,  0, intent, 0);
+                                PendingIntent.getService(context,  0, intent, 0);
 
                         AlarmManager trackingAlarm =
                                 (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
@@ -59,7 +59,7 @@ public class GPSStartedReceiver extends BroadcastReceiver {
                                 calendar.getTimeInMillis(), TRACKING_FREQUENCY, pendingIntent);
 
                         intent = new Intent(context, LocationsService.class);
-                        pendingIntent = PendingIntent.getBroadcast(context,  0, intent, 0);
+                        pendingIntent = PendingIntent.getService(context,  0, intent, 0);
 
                         AlarmManager fetchingAlarm =
                                 (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
