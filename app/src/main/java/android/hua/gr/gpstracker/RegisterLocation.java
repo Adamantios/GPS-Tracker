@@ -86,8 +86,8 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void v) {
         // Display proper toast message
         if (!succeded)
-            Toast.makeText(context, R.string.post_location_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.post_location_error, Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(context, R.string.post_location_success, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.post_location_success, Toast.LENGTH_LONG).show();
     }
 }

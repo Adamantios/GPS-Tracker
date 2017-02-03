@@ -79,9 +79,9 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
         dm.deleteAllUsersFromDB();
 
         if (!dm.saveLocationsToDB(users))
-            Toast.makeText(context, R.string.save_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.save_error, Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(context, R.string.save_success, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.save_success, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -94,7 +94,7 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void v) {
         // Display proper toast message
         if (!succeded)
-            Toast.makeText(context, R.string.get_locations_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.get_locations_error, Toast.LENGTH_LONG).show();
         else
             saveLocations();
     }
