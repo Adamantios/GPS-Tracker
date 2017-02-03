@@ -2,11 +2,9 @@ package android.hua.gr.gpstracker;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -41,7 +39,6 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
             HttpGet httpGet = new HttpGet(REST_URL);
 
             HttpResponse response = httpclient.execute(httpGet);
-            Log.d("debug", Integer.toString(response.getStatusLine().getStatusCode()));
 
             if (response.getStatusLine().getStatusCode() == 200) {
                 // Create a JSON object from the response

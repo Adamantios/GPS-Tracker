@@ -22,8 +22,7 @@ public class UserProvider extends ContentProvider {
     /**
      * The content provider's name
      */
-    private static final String PROVIDER_NAME =
-            "android.hua.gr.gpstracker.contentProvider.UserProvider";
+    private static final String PROVIDER_NAME = "android.hua.gr.gpstracker.UserProvider";
 
     /**
      * The URL of the Db's "users" table

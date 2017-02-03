@@ -13,8 +13,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.util.Date;
 
 class RegisterLocation extends AsyncTask<Void, Void, Void> {
 
@@ -46,7 +44,8 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
             jsonObject.accumulate("userid", "mpampoulas");
             jsonObject.accumulate("longitude", longitude);
             jsonObject.accumulate("latitude", latitude);
-            jsonObject.accumulate("dt", android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss a", new java.util.Date()));
+            jsonObject.accumulate("dt", android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss",
+                    new java.util.Date()));
 
             // Convert JSONObject to String
             String json = jsonObject.toString();

@@ -31,9 +31,10 @@
         <service android:name=".GPSTracker" android:exported="false"/>
         <service android:name=".LocationsService" android:exported="false"/>
 
-        <provider android:name="UserProvider"
+        <provider android:name=".UserProvider"
             android:authorities="android.hua.gr.gpstracker.UserProvider"
-            android:exported="false" />
+            android:exported="false" >
+        </provider>
     </application>
 
 </manifest>
