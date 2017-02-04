@@ -1,6 +1,7 @@
 package android.hua.gr.gpstracker;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -10,8 +11,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 class RegisterLocation extends AsyncTask<Void, Void, Void> {
@@ -24,6 +27,7 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
     private static Double latitude;
     private Context context;
     private boolean succeded = false;
+    private static boolean serverRefusedConnection = false;
 
     RegisterLocation(Location lastLocation, Context context) {
         longitude = lastLocation.getLongitude();
@@ -68,7 +72,10 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
 
             return inputStream != null;
 
-        } catch (Exception e) {
+        } catch (org.apache.http.conn.HttpHostConnectException e) {
+            serverRefusedConnection = true;
+            return false;
+        } catch (IOException | JSONException e) {
             return false;
         }
     }
@@ -84,9 +91,22 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void v) {
         // Display proper toast message
-        if (!succeded)
-            Toast.makeText(context, R.string.post_location_error, Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(context, R.string.post_location_success, Toast.LENGTH_LONG).show();
+        if (serverRefusedConnection) {
+            Toast toast = Toast.makeText(context, R.string.server_refused_connection,
+                    Toast.LENGTH_LONG);
+            toast.getView().setBackgroundColor(Color.RED);
+            toast.show();
+        }
+        else if (!succeded) {
+            Toast toast = Toast.makeText(context, R.string.post_location_error, Toast.LENGTH_LONG);
+            toast.getView().setBackgroundColor(Color.RED);
+            toast.show();
+        }
+        else {
+            Toast toast = Toast.makeText(context, R.string.post_location_success,
+                    Toast.LENGTH_LONG);
+            toast.getView().setBackgroundColor(Color.GREEN);
+            toast.show();
+        }
     }
 }

@@ -1,7 +1,9 @@
 package android.hua.gr.gpstracker;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -24,6 +26,7 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
     private static final String REST_URL = "http://62.217.127.19:8000/location";
     private Context context;
     private static boolean succeded = false;
+    private static boolean serverRefusedConnection = false;
     private static ArrayList<User> users = new ArrayList<>();
 
     FetchLocations(Context context) {
@@ -67,6 +70,8 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
                 succeded = true;
             }
 
+        } catch (org.apache.http.conn.HttpHostConnectException e) {
+            serverRefusedConnection = true;
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -79,10 +84,18 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
         DataManagement dm = new DataManagement(context);
         dm.deleteAllUsersFromDB();
 
-        if (!dm.saveLocationsToDB(users))
-            Toast.makeText(context, R.string.save_error, Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(context, R.string.save_success, Toast.LENGTH_LONG).show();
+        if (!dm.saveLocationsToDB(users)) {
+            Toast toast = Toast.makeText(context, R.string.save_error, Toast.LENGTH_LONG);
+            toast.getView().setBackgroundColor(Color.RED);
+            toast.show();
+        } else {
+            Toast toast = Toast.makeText(context, R.string.save_success, Toast.LENGTH_LONG);
+            toast.getView().setBackgroundColor(Color.GREEN);
+            toast.show();
+        }
+
+        for (User user : dm.getAllUsersFromDB())
+            Log.d("------------\n\nTHE USERS", user.getUserId() + user.getUserId() + user.getLatitude() + user.getLongitude() + user.getDt() + "\n");
     }
 
     @Override
@@ -94,8 +107,16 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void v) {
         // Display proper toast message
-        if (!succeded)
-            Toast.makeText(context, R.string.get_locations_error, Toast.LENGTH_LONG).show();
+        if (serverRefusedConnection) {
+            Toast toast = Toast.makeText(context, R.string.server_refused_connection,
+                    Toast.LENGTH_LONG);
+            toast.getView().setBackgroundColor(Color.RED);
+            toast.show();
+        } else if (!succeded) {
+            Toast toast = Toast.makeText(context, R.string.get_locations_error, Toast.LENGTH_LONG);
+            toast.getView().setBackgroundColor(Color.RED);
+            toast.show();
+        }
         else
             saveLocations();
     }

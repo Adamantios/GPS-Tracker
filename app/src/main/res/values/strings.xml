@@ -8,6 +8,7 @@
     <string name="internet_settings">Cannot establish internet connection!
         Would you like to go to the settings menu?</string>
     <string name="starting_tracker">Your position will start being tracked in 5 seconds…</string>
+    <string name="server_refused_connection">Cannot establish connection with the server!</string>
     <string name="post_location_error">
         Something went wrong while trying to register your current location!
         Please check your internet connection!
