@@ -62,7 +62,7 @@ class DataManagement {
     /**
      * Returns an ArrayList containing all the users of the mobile's DB
      */
-    public ArrayList<User> getAllUsersFromDB() {
+    ArrayList<User> getAllUsersFromDB() {
         Uri uri = UserProvider.CONTENT_URI;
 
         String[] projection = new String[]{
