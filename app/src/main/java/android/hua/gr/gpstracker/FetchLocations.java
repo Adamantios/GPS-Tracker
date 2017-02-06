@@ -44,10 +44,10 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
             HttpResponse response = httpclient.execute(httpGet);
 
             if (response.getStatusLine().getStatusCode() == 200) {
-                // Create a JSON object from the response
+                // Create a JSON array from the response
                 JSONArray json = new JSONArray(EntityUtils.toString(response.getEntity()));
 
-                // Add every User's Data into the ArrayList
+                // Add every user's data into the users ArrayList
                 for (int i = 0; i < json.length(); i++) {
                     JSONObject jsonSingleDataRow = json.getJSONObject(i);
 
