@@ -3,7 +3,7 @@ package android.hua.gr.gpstracker;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -86,16 +86,17 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
 
         if (!dm.saveLocationsToDB(users)) {
             Toast toast = Toast.makeText(context, R.string.save_error, Toast.LENGTH_LONG);
+            TextView message = (TextView) toast.getView().findViewById(android.R.id.message);
+            message.setTextColor(Color.GRAY);
             toast.getView().setBackgroundColor(Color.RED);
             toast.show();
         } else {
             Toast toast = Toast.makeText(context, R.string.save_success, Toast.LENGTH_LONG);
+            TextView message = (TextView) toast.getView().findViewById(android.R.id.message);
+            message.setTextColor(Color.GRAY);
             toast.getView().setBackgroundColor(Color.GREEN);
             toast.show();
         }
-
-        for (User user : dm.getAllUsersFromDB())
-            Log.d("------------\n\nTHE USERS", user.getUserId() + user.getUserId() + user.getLatitude() + user.getLongitude() + user.getDt() + "\n");
     }
 
     @Override
@@ -106,18 +107,24 @@ class FetchLocations extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void v) {
+        // Dismiss the progress dialog
+        MainActivity.dismissProgressDialog();
+
         // Display proper toast message
         if (serverRefusedConnection) {
             Toast toast = Toast.makeText(context, R.string.server_refused_connection,
                     Toast.LENGTH_LONG);
+            TextView message = (TextView) toast.getView().findViewById(android.R.id.message);
+            message.setTextColor(Color.GRAY);
             toast.getView().setBackgroundColor(Color.RED);
             toast.show();
         } else if (!succeded) {
             Toast toast = Toast.makeText(context, R.string.get_locations_error, Toast.LENGTH_LONG);
+            TextView message = (TextView) toast.getView().findViewById(android.R.id.message);
+            message.setTextColor(Color.GRAY);
             toast.getView().setBackgroundColor(Color.RED);
             toast.show();
-        }
-        else
+        } else
             saveLocations();
     }
 }

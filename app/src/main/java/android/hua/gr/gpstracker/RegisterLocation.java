@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -11,6 +12,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,17 +47,17 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
 
             // Build jsonObject
             JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("userid", "mpampoulas");
+            jsonObject.accumulate("userid", "it21222");
             jsonObject.accumulate("longitude", longitude);
             jsonObject.accumulate("latitude", latitude);
-            jsonObject.accumulate("dt", android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss",
+            jsonObject.accumulate("dt", android.text.format.DateFormat.format("yyyy-MM-dd;hh:mm:ss",
                     new java.util.Date()));
 
             // Convert JSONObject to String
             String json = jsonObject.toString();
 
             // Set json to StringEntity
-            StringEntity stringEntity = new StringEntity(json);
+            StringEntity stringEntity = new StringEntity(json, HTTP.UTF_8);
 
             // Set httpPost Entity
             httpPost.setEntity(stringEntity);
@@ -94,17 +96,21 @@ class RegisterLocation extends AsyncTask<Void, Void, Void> {
         if (serverRefusedConnection) {
             Toast toast = Toast.makeText(context, R.string.server_refused_connection,
                     Toast.LENGTH_LONG);
+            TextView message = (TextView) toast.getView().findViewById(android.R.id.message);
+            message.setTextColor(Color.GRAY);
             toast.getView().setBackgroundColor(Color.RED);
             toast.show();
-        }
-        else if (!succeded) {
+        } else if (!succeded) {
             Toast toast = Toast.makeText(context, R.string.post_location_error, Toast.LENGTH_LONG);
+            TextView message = (TextView) toast.getView().findViewById(android.R.id.message);
+            message.setTextColor(Color.GRAY);
             toast.getView().setBackgroundColor(Color.RED);
             toast.show();
-        }
-        else {
+        } else {
             Toast toast = Toast.makeText(context, R.string.post_location_success,
                     Toast.LENGTH_LONG);
+            TextView message = (TextView) toast.getView().findViewById(android.R.id.message);
+            message.setTextColor(Color.GRAY);
             toast.getView().setBackgroundColor(Color.GREEN);
             toast.show();
         }

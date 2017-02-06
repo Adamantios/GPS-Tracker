@@ -29,5 +29,6 @@
         android:layout_centerVertical="true"
         android:onClick="fetchLocations"
         android:text="@string/fetch_other_users"
+        android:background="@android:color/transparent"
         android:textColor="#7c338c" />
 </RelativeLayout>

@@ -14,6 +14,7 @@ class DataManagement {
 
     /**
      * DataManagement Constructor
+     *
      * @param context the context
      */
     DataManagement(Context context) {
@@ -31,6 +32,7 @@ class DataManagement {
 
     /**
      * Inserts all the users with their locations to the phone's Db.
+     *
      * @param users the users to insert
      */
     boolean saveLocationsToDB(ArrayList<User> users) {

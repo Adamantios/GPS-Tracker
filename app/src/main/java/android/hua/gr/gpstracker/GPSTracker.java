@@ -3,11 +3,14 @@ package android.hua.gr.gpstracker;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class GPSTracker extends Service {
 
@@ -29,8 +32,14 @@ public class GPSTracker extends Service {
 
             if (connectivityHelper.isNetworkAvailable())
                 new RegisterLocation(lastLocation, getApplicationContext()).execute();
-            else
-                connectivityHelper.showNetworkAlert();
+            else {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.network_error,
+                        Toast.LENGTH_LONG);
+                TextView message = (TextView) toast.getView().findViewById(android.R.id.message);
+                message.setTextColor(Color.GRAY);
+                toast.getView().setBackgroundColor(Color.RED);
+                toast.show();
+            }
         }
 
         @Override

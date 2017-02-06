@@ -17,14 +17,16 @@ class ConnectivityHelper {
 
     /**
      * ConnectivityHelper Constructor
+     *
      * @param context the context
      */
-    ConnectivityHelper(Context context){
+    ConnectivityHelper(Context context) {
         this.context = context;
     }
 
     /**
      * Checks if network is available
+     *
      * @return if network is available
      */
     boolean isNetworkAvailable() {
@@ -36,17 +38,18 @@ class ConnectivityHelper {
 
     /**
      * Checks if GPS is available
+     *
      * @return if GPS is available
      */
     boolean isGpsAvailable() {
-        LocationManager lm = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+        LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     /**
      * Shows Alert Dialog in order to get the user to the GPS settings
      */
-    void showGPSAlert(){
+    void showGPSAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
         // Setting Dialog Title

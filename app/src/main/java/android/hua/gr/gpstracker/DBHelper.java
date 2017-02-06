@@ -10,7 +10,7 @@ class DBHelper extends SQLiteOpenHelper {
     /**
      * The Db's name
      */
-    private static final String DATABASE_NAME  = "gps_tracker";
+    private static final String DATABASE_NAME = "gps_tracker";
 
     /**
      * The Db's Table name
@@ -49,6 +49,7 @@ class DBHelper extends SQLiteOpenHelper {
 
     /**
      * DBHelper's Constructor
+     *
      * @param context the context
      */
     DBHelper(Context context) {
@@ -72,7 +73,7 @@ class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop the DB and create it again
-        db.execSQL("DROP TABLE IF EXISTS " +  TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         onCreate(db);
     }
 }
